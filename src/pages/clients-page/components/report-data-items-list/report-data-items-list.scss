@@ -1,0 +1,20 @@
+.reportDataItemsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .reportDataItemsListHeader {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    padding: 10px 0 20px 0;
+  }
+
+  .reportDataItemsListWrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+}

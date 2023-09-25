@@ -1,0 +1,19 @@
+.reportDataItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 140px;
+
+  .img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .closeDataItem {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+}

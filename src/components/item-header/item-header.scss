@@ -1,0 +1,29 @@
+.headerItemInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .arrowButton {
+    display: flex;
+    cursor: pointer;
+    transform: rotate(270deg);
+    transform-origin: center center;
+
+    &.open {
+      transform: rotate(90deg);
+      transform-origin: center center;
+    }
+  }
+
+  .headerItemName {
+    font-size: 18px;
+  }
+
+  .closeButton {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+}

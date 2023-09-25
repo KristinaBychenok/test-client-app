@@ -1,0 +1,26 @@
+.clientItem {
+  border: 1px solid #000;
+  margin: 10px 0;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .clientItemReports {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0;
+    border: 1px solid #000;
+    padding: 10px 0;
+
+    .clientItemReportsHeader {
+      display: flex;
+      width: 95%;
+      justify-content: space-between;
+      padding-bottom: 10px;
+    }
+  }
+}
