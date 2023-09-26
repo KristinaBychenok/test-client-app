@@ -6,3 +6,5 @@ export const store = configureStore({
     clientsPage: clientsPageSlice.reducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
