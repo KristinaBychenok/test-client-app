@@ -2,6 +2,7 @@ export type AddButtonProps = {
   name: string;
   size: ButtonSize;
   onClick: () => void;
+  isLoading: boolean;
 };
 
 export enum ButtonSize {

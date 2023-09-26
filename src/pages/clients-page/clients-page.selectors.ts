@@ -9,3 +9,13 @@ export const getClients = createSelector(
   getClientsPageSlice,
   (clientsState) => clientsState.clients
 );
+
+export const getSearchableClients = createSelector(
+  getClientsPageSlice,
+  (clientsState) => clientsState.searchableClients
+);
+
+export const getClientsCounter = createSelector(
+  getClientsPageSlice,
+  (clientsState) => clientsState.clientCounter
+);

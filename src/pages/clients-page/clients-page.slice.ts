@@ -8,6 +8,11 @@ import {
 
 const clientsPageInitialState: ClientsPageState = {
   clients: [],
+  searchableClients: {
+    clientsList: [],
+    isNoFound: false,
+  },
+  clientCounter: 1,
 };
 
 export const clientsPageSlice = createSlice({
@@ -19,6 +24,7 @@ export const clientsPageSlice = createSlice({
     },
     addClient: (state, { payload }: PayloadAction<Client>) => {
       state.clients = [...state.clients, payload];
+      state.clientCounter += 1;
     },
     deleteClient: (state, { payload }: PayloadAction<string>) => {
       state.clients = state.clients.filter((client) => client.id !== payload);
@@ -33,6 +39,7 @@ export const clientsPageSlice = createSlice({
 
       if (!!updatedClient) {
         updatedClient.reports = [...updatedClient?.reports, payload.report];
+        updatedClient.reportsCounter += 1;
       }
     },
     deleteReport: (
@@ -93,6 +100,23 @@ export const clientsPageSlice = createSlice({
         );
       }
     },
+    setSearchableClients: (state, { payload }: PayloadAction<string>) => {
+      if (payload.length !== 0) {
+        const result = state.clients.filter((client) =>
+          client.name.includes(payload)
+        );
+
+        if (result.length !== 0) {
+          state.searchableClients.clientsList = result;
+        } else {
+          state.searchableClients.clientsList = [];
+          state.searchableClients.isNoFound = true;
+        }
+      } else {
+        state.searchableClients.clientsList = [];
+        state.searchableClients.isNoFound = false;
+      }
+    },
   },
 });
 
@@ -104,4 +128,5 @@ export const {
   deleteReport,
   addReportData,
   deleteReportData,
+  setSearchableClients,
 } = clientsPageSlice.actions;

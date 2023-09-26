@@ -1,10 +1,9 @@
 import { rest } from "msw";
-import data from "./data.json";
 import { v4 as uuidv4 } from "uuid";
 
 export const handlers = [
   rest.get("/clients", (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(data));
+    return res(ctx.status(200), ctx.json([]));
   }),
 
   rest.post("/client", async (req, res, ctx) => {
@@ -16,6 +15,7 @@ export const handlers = [
         id: uuidv4(),
         name: newClient.clientName,
         reports: [],
+        reportsCounter: 1,
       })
     );
   }),

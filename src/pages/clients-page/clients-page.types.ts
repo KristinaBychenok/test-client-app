@@ -1,11 +1,17 @@
 export interface ClientsPageState {
   clients: Client[];
+  searchableClients: {
+    clientsList: Client[];
+    isNoFound: boolean;
+  };
+  clientCounter: number;
 }
 
 export interface Client {
   id: string;
   name: string;
   reports: ReportT[];
+  reportsCounter: number;
 }
 
 export type ReportT = {

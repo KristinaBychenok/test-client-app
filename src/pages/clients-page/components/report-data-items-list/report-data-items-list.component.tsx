@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import { ButtonSize } from "../../../../components/add-button/add-button.types";
 import { AddButton } from "../../../../components/add-button/add-button.component";
 import "./report-data-items-list.scss";
@@ -22,9 +22,11 @@ export const ReportDataItemsList: FC<ReportDataItemsListProps> = ({
   data,
   name,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const addDataHandler = useCallback(async () => {
+    setIsLoading(true);
     const randomImgId = Math.floor(Math.random() * 4);
 
     const img =
@@ -38,6 +40,7 @@ export const ReportDataItemsList: FC<ReportDataItemsListProps> = ({
         addReportData({ clientId, reportId, reportData: newReportData })
       );
     }
+    setTimeout(() => setIsLoading(false), 200);
   }, [clientId, reportId]);
 
   return (
@@ -48,6 +51,7 @@ export const ReportDataItemsList: FC<ReportDataItemsListProps> = ({
           name="Add data"
           size={ButtonSize.Small}
           onClick={addDataHandler}
+          isLoading={isLoading}
         />
       </div>
       <div className="reportDataItemsListWrapper">

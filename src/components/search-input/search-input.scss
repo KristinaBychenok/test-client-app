@@ -1,29 +1,26 @@
-.addButton {
+.search {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-.button {
-  border-radius: 20px;
+  width: 200px;
   border: 1px solid #111;
-  cursor: pointer;
   background-color: rgb(246, 189, 189);
+  height: 30px;
+  padding: 0 5px;
 
   &:hover {
     background-color: rgb(245, 168, 168);
   }
 
-  &.large {
+  .searchInput {
+    background: none;
+    border: none;
     font-size: 18px;
-    width: 150px;
-    height: 30px;
-  }
+    width: 170px;
 
-  &.medium {
-    font-size: 16px;
-    width: 100px;
-    height: 25px;
+    &:focus-visible {
+      outline: 0;
+    }
   }
 }

@@ -5,10 +5,17 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
 
-.pageTitle {
+  .pageTitle {
     text-align: center;
     font-size: 30px;
     margin: 20px;
+  }
+
+  .message {
+    font-size: 18px;
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+  }
 }
