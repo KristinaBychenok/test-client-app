@@ -5,7 +5,7 @@ import "./report-item.scss";
 import { ReportDataItemsList } from "../report-data-items-list/report-data-items-list.component";
 import { deleteReportApi } from "../../../../app/api/reports/reports.api";
 import { useDispatch } from "react-redux";
-import { deleteReport } from "../../clients-page.slice";
+import { deleteReport, setErrorMessage } from "../../clients-page.slice";
 
 type ReportItemProps = {
   clientId: string;
@@ -29,9 +29,15 @@ export const ReportItem: FC<ReportItemProps> = ({
   }, [isOpen]);
 
   const deleteReportHandler = useCallback(async () => {
-    const deletedReportId = deleteReportApi(reportId);
+    const deletedReportId = await deleteReportApi(reportId);
 
-    if (!!deletedReportId) dispatch(deleteReport({ clientId, reportId }));
+    if (!!deletedReportId) {
+      dispatch(deleteReport({ clientId, reportId }));
+    } else {
+      dispatch(setErrorMessage("Error deleting report"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
+    }
   }, [clientId, reportId]);
 
   return (

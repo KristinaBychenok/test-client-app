@@ -1,11 +1,11 @@
 import { Client } from "../../../pages/clients-page/clients-page.types";
-import { DeleteClient, FetchClients } from "./clients.types";
+import { DeleteClient } from "./clients.types";
 
 export const fetchClientsApi = async () => {
   try {
     const response = await fetch("/clients");
-    const data: FetchClients = await response.json();
-    return data.clients;
+    const data: Client[] = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching clients:", error);
   }

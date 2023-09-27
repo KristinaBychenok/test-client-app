@@ -6,7 +6,7 @@ import { ReportData } from "../../clients-page.types";
 import { ReportDataItem } from "../report-data-item/report-data-item.component";
 import { postReportDataApi } from "../../../../app/api/reports-data/reports-data.api";
 import { useDispatch } from "react-redux";
-import { addReportData } from "../../clients-page.slice";
+import { addReportData, setErrorMessage } from "../../clients-page.slice";
 import { reportDataItems } from "./report-data-items-list.constants";
 
 type ReportDataItemsListProps = {
@@ -39,7 +39,12 @@ export const ReportDataItemsList: FC<ReportDataItemsListProps> = ({
       dispatch(
         addReportData({ clientId, reportId, reportData: newReportData })
       );
+    } else {
+      dispatch(setErrorMessage("Error posting report data"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
     }
+
     setTimeout(() => setIsLoading(false), 200);
   }, [clientId, reportId]);
 

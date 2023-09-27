@@ -13,6 +13,7 @@ const clientsPageInitialState: ClientsPageState = {
     isNoFound: false,
   },
   clientCounter: 1,
+  errorMessage: null,
 };
 
 export const clientsPageSlice = createSlice({
@@ -117,6 +118,9 @@ export const clientsPageSlice = createSlice({
         state.searchableClients.isNoFound = false;
       }
     },
+    setErrorMessage: (state, { payload }: PayloadAction<string | null>) => {
+      state.errorMessage = payload;
+    },
   },
 });
 
@@ -129,4 +133,5 @@ export const {
   addReportData,
   deleteReportData,
   setSearchableClients,
+  setErrorMessage,
 } = clientsPageSlice.actions;

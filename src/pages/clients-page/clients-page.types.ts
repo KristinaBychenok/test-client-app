@@ -5,6 +5,7 @@ export interface ClientsPageState {
     isNoFound: boolean;
   };
   clientCounter: number;
+  errorMessage: string | null;
 }
 
 export interface Client {

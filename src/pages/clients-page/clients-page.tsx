@@ -4,13 +4,28 @@ import "./clients-page.scss";
 import { Header } from "./components/header/header.component";
 import { useFetchClientsHook } from "./clients-page.hook";
 import { useSelector } from "react-redux";
-import { getClients, getSearchableClients } from "./clients-page.selectors";
+import {
+  getClients,
+  getErrorMessage,
+  getSearchableClients,
+} from "./clients-page.selectors";
 import { ClientItem } from "./components/client-item/client-item.component";
-import { Spiner } from "../../components/spiner/spiner.component";
+import { ErrorPopup } from "../../components/error-popup/error-popup.component";
 
 export const ClientsPage: FC = () => {
   const clients = useSelector(getClients);
   const searchableClients = useSelector(getSearchableClients);
+  const errorMessage = useSelector(getErrorMessage);
+
+  const navigate = useNavigate();
+
+  useEffect(() => navigate("/clients"), []);
+
+  const fetchClients = useFetchClientsHook();
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
 
   const clientsToView = useMemo(() => {
     if (
@@ -22,16 +37,6 @@ export const ClientsPage: FC = () => {
       return searchableClients.clientsList;
     }
   }, [clients, searchableClients]);
-
-  const navigate = useNavigate();
-
-  useEffect(() => navigate("/clients"), []);
-
-  const fetchClients = useFetchClientsHook();
-
-  useEffect(() => {
-    fetchClients();
-  }, []);
 
   return (
     <div className="wrapper">
@@ -51,6 +56,9 @@ export const ClientsPage: FC = () => {
           );
         })
       )}
+      <div className="errorPopup">
+        {errorMessage && <ErrorPopup error={errorMessage} />}
+      </div>
     </div>
   );
 };

@@ -19,3 +19,8 @@ export const getClientsCounter = createSelector(
   getClientsPageSlice,
   (clientsState) => clientsState.clientCounter
 );
+
+export const getErrorMessage = createSelector(
+  getClientsPageSlice,
+  (clientsState) => clientsState.errorMessage
+);

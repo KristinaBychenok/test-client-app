@@ -3,7 +3,7 @@ import "./report-data-item.scss";
 import { IconClose20 } from "../../../../components/svg/close-icon.component";
 import { deleteReportDataApi } from "../../../../app/api/reports-data/reports-data.api";
 import { useDispatch } from "react-redux";
-import { deleteReportData } from "../../clients-page.slice";
+import { deleteReportData, setErrorMessage } from "../../clients-page.slice";
 
 type ReportDataItemProps = {
   clientId: string;
@@ -33,6 +33,10 @@ export const ReportDataItem: FC<ReportDataItemProps> = ({
           reportDataId: deletedReportDataItemId,
         })
       );
+    } else {
+      dispatch(setErrorMessage("Error deleting report data"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
     }
   };
 

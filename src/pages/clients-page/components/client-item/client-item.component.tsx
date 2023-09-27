@@ -7,7 +7,11 @@ import { AddButton } from "../../../../components/add-button/add-button.componen
 import { ButtonSize } from "../../../../components/add-button/add-button.types";
 import { deleteClientApi } from "../../../../app/api/clients/clients.api";
 import { useDispatch, useSelector } from "react-redux";
-import { addReport, deleteClient } from "../../clients-page.slice";
+import {
+  addReport,
+  deleteClient,
+  setErrorMessage,
+} from "../../clients-page.slice";
 import { postReportApi } from "../../../../app/api/reports/reports.api";
 import { getClients } from "../../clients-page.selectors";
 
@@ -41,6 +45,10 @@ export const ClientItem: FC<ClientItemProps> = ({
 
     if (!!deletedClientId) {
       dispatch(deleteClient(deletedClientId));
+    } else {
+      dispatch(setErrorMessage("Error deleting client"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
     }
   }, [clientId]);
 
@@ -50,7 +58,12 @@ export const ClientItem: FC<ClientItemProps> = ({
 
     if (!!newRwport) {
       dispatch(addReport({ report: newRwport, clientId }));
+    } else {
+      dispatch(setErrorMessage("Error posting report"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
     }
+
     setTimeout(() => setIsLoading(false), 200);
   }, [clientId, reportNumber]);
 

@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { postClientApi } from "../../../../app/api/clients/clients.api";
 import { AddButton } from "../../../../components/add-button/add-button.component";
 import { ButtonSize } from "../../../../components/add-button/add-button.types";
-import { addClient, setSearchableClients } from "../../clients-page.slice";
+import {
+  addClient,
+  setErrorMessage,
+  setSearchableClients,
+} from "../../clients-page.slice";
 import { SearchInput } from "../../../../components/search-input/search-input.component";
 import "./header.scss";
 import { useCallback, useMemo, useState } from "react";
@@ -22,6 +26,10 @@ export const Header = () => {
 
     if (!!newClient) {
       dispatch(addClient(newClient));
+    } else {
+      dispatch(setErrorMessage("Error posting client"));
+
+      setTimeout(() => dispatch(setErrorMessage(null)), 2000);
     }
 
     setTimeout(() => setIsLoading(false), 100);
